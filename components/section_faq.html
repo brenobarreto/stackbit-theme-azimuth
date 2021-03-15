@@ -1,0 +1,32 @@
+{% set section = include_dict.section %}
+<section id="{{ section.section_id }}" class="block faq-block bg-{{ section.background }} outer">
+  <div class="inner-small">
+    <div class="block-header">
+      {% if section.title %}
+      <h2 class="block-title">{{ section.title }}</h2>
+      {% endif %}
+      {% if section.subtitle %}
+      <p class="block-subtitle">
+        {{ section.subtitle | safe }}
+      </p>
+      {% endif %}
+    </div>
+    {% if section.faq_items %}
+    <div class="faq-accordion handorgel">
+      {% for faqitem in section.faq_items %}
+      <h3 class="faq-accordion-header handorgel__header">
+        <button class="handorgel__trigger">
+          <span>{{ faqitem.question }}</span>
+          <span class="handorgel__icon icon-plus"></span>
+        </button>
+      </h3>
+      <div class="faq-accordion-content handorgel__content">
+        <div class="handorgel__content-inner">
+          {{ faqitem.answer | markdownify }}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</section><!-- .block -->
